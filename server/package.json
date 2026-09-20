@@ -1,0 +1,27 @@
+{
+  "name": "tasty-namkeens-server",
+  "version": "1.0.0",
+  "description": "Backend API for Tasty Namkeens B2B E-Commerce Platform",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "seed": "node src/seed.js",
+    "seed:prod": "node src/seedProd.js",
+    "test": "node test/test_suite.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1",
+    "dotenv": "^16.4.5",
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "keywords": ["b2b", "ecommerce", "namkeens", "snacks"],
+  "author": "Tasty Namkeens",
+  "license": "ISC"
+}

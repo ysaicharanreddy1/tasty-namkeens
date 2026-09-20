@@ -1,0 +1,16 @@
+{
+  "name": "tasty-namkeens-monorepo",
+  "version": "1.0.0",
+  "description": "Tasty Namkeens - B2B Wholesale Indian Snacks Platform",
+  "scripts": {
+    "server": "npm run dev --prefix server",
+    "client": "npm run dev --prefix client",
+    "seed": "npm run seed --prefix server",
+    "seed:fresh": "npm run seed --prefix server -- --fresh",
+    "seed:prod": "npm run seed:prod --prefix server",
+    "test": "npm test --prefix server"
+  },
+  "keywords": ["namkeens", "b2b", "ecommerce", "wholesale"],
+  "author": "Tasty Namkeens",
+  "license": "ISC"
+}
