@@ -33,6 +33,7 @@ export default function AdminDashboard() {
 
   // New user form state
   const [newUserName, setNewUserName] = useState('');
+  const [newUserUsername, setNewUserUsername] = useState('');
   const [newUserEmail, setNewUserEmail] = useState('');
   const [newUserPassword, setNewUserPassword] = useState('');
   const [newUserPhone, setNewUserPhone] = useState('');
@@ -91,7 +92,8 @@ export default function AdminDashboard() {
     try {
       const res = await api.post('/admin/users', {
         name: newUserName,
-        email: newUserEmail,
+        username: newUserUsername.trim().toLowerCase(),
+        email: newUserEmail.trim().toLowerCase(),
         password: newUserPassword,
         phone: newUserPhone,
         address: {
@@ -103,8 +105,9 @@ export default function AdminDashboard() {
       });
 
       if (res.data?.success) {
-        setFormMsg({ type: 'success', text: `Supermarket account created for ${newUserName}!` });
+        setFormMsg({ type: 'success', text: `Supermarket account created for ${newUserName} (Username: ${newUserUsername || newUserName})!` });
         setNewUserName('');
+        setNewUserUsername('');
         setNewUserEmail('');
         setNewUserPassword('');
         setNewUserPhone('');
@@ -123,13 +126,12 @@ export default function AdminDashboard() {
       <header className="bg-white border-b border-amber-200 sticky top-0 z-30 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
           <div className="flex items-center gap-3">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="w-9 h-9 rounded-lg bg-brand-crimson text-brand-gold font-black flex items-center justify-center text-lg">
-                TN
-              </div>
-              <span className="font-extrabold text-xl text-gray-900 hidden sm:inline">
-                Tasty Namkeens
-              </span>
+            <Link to="/" className="shrink-0">
+              <img
+                src="/images/logo.png"
+                alt="Tasty Namkeens"
+                className="h-10 w-auto"
+              />
             </Link>
             <span className="text-xs bg-amber-100 text-amber-900 px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5 text-brand-crimson" />
@@ -306,7 +308,7 @@ export default function AdminDashboard() {
                 <thead className="bg-amber-50/80 text-amber-900 border-b border-amber-200">
                   <tr>
                     <th className="p-4 font-bold uppercase">Store Name</th>
-                    <th className="p-4 font-bold uppercase">Email</th>
+                    <th className="p-4 font-bold uppercase">Username</th>
                     <th className="p-4 font-bold uppercase">Phone</th>
                     <th className="p-4 font-bold uppercase">City</th>
                     <th className="p-4 font-bold uppercase">Status</th>
@@ -317,7 +319,7 @@ export default function AdminDashboard() {
                   {usersList.map((u) => (
                     <tr key={u._id} className="hover:bg-amber-50/20">
                       <td className="p-4 font-bold text-gray-900">{u.name}</td>
-                      <td className="p-4 text-gray-600">{u.email}</td>
+                      <td className="p-4 text-gray-600 font-mono">@{u.username || '—'}</td>
                       <td className="p-4 text-gray-600">{u.phone || '—'}</td>
                       <td className="p-4 text-gray-600">{u.address?.city || 'Hyderabad'}</td>
                       <td className="p-4">
@@ -381,10 +383,21 @@ export default function AdminDashboard() {
               </div>
 
               <div>
-                <label className="block font-bold text-gray-700 uppercase mb-1">Login Email</label>
+                <label className="block font-bold text-gray-700 uppercase mb-1">Login Username</label>
+                <input
+                  type="text"
+                  required
+                  value={newUserUsername}
+                  onChange={(e) => setNewUserUsername(e.target.value)}
+                  placeholder="e.g. royalsupermarket"
+                  className="w-full p-2.5 rounded-xl bg-gray-50 border border-gray-300 text-sm outline-none focus:border-brand-crimson"
+                />
+              </div>
+
+              <div>
+                <label className="block font-bold text-gray-700 uppercase mb-1">Contact Email (Optional)</label>
                 <input
                   type="email"
-                  required
                   value={newUserEmail}
                   onChange={(e) => setNewUserEmail(e.target.value)}
                   placeholder="e.g. royal@example.com"

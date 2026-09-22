@@ -1,18 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { 
-  Lock, 
-  Mail, 
-  Store, 
-  ShieldCheck, 
-  MessageCircle, 
-  AlertCircle, 
-  ArrowRight,
-  CheckCircle2,
-  Eye,
-  EyeOff
-} from 'lucide-react';
+import { Lock, User as UserIcon, AlertCircle, ArrowRight, Eye, EyeOff, MessageCircle } from 'lucide-react';
 
 const ADMIN_WHATSAPP = '919908478783';
 
@@ -20,7 +9,7 @@ export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -30,13 +19,13 @@ export default function LoginPage() {
     e.preventDefault();
     setError('');
 
-    if (!email || !password) {
-      setError('Please provide both email and password.');
+    if (!username.trim() || !password) {
+      setError('Please provide both username and password.');
       return;
     }
 
     setLoading(true);
-    const res = await login(email, password);
+    const res = await login(username.trim(), password);
     setLoading(false);
 
     if (res.success) {
@@ -50,52 +39,30 @@ export default function LoginPage() {
     }
   };
 
-  // Quick fill helper for testing
-  const fillCredentials = (role) => {
-    setError('');
-    if (role === 'admin') {
-      setEmail('admin@tastynam-keens.com');
-      setPassword('Admin@TastyNamkeens2024');
-    } else if (role === 'supermarket1') {
-      setEmail('srilakshmi@example.com');
-      setPassword('Supermarket@123');
-    } else if (role === 'supermarket2') {
-      setEmail('balaji@example.com');
-      setPassword('Supermarket@456');
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-red-50/40 to-amber-100/50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      {/* Top Header Link */}
+    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
+      {/* Brand Logo Header */}
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <Link to="/" className="inline-flex items-center gap-2 group mb-4">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-crimson to-brand-crimsonLight flex items-center justify-center font-black text-brand-gold text-2xl shadow-md group-hover:scale-105 transition-transform">
-            TN
-          </div>
-          <span className="text-2xl font-black tracking-tight text-brand-charcoal">
-            Tasty <span className="text-brand-crimson">Namkeens</span>
-          </span>
+        <Link to="/" className="inline-block mb-4 hover:opacity-90 transition-opacity">
+          <img
+            src="/images/logo.png"
+            alt="Tasty Namkeens"
+            className="h-16 w-auto mx-auto"
+          />
         </Link>
-        <h2 className="text-2xl font-black text-gray-900 tracking-tight">
+        <h2 className="text-xl font-bold text-gray-900">
           Supermarket & Admin Portal
         </h2>
-        <p className="mt-1 text-xs text-gray-600">
-          Wholesale bulk order placement and store inventory management
+        <p className="mt-1 text-xs text-gray-500">
+          Sign in with your assigned username and password
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-6 shadow-xl shadow-amber-900/10 rounded-3xl border border-amber-200/80 sm:px-10 space-y-6">
-          {/* Role badge */}
-          <div className="flex items-center justify-center gap-2 bg-amber-50 text-amber-900 text-xs font-bold py-2 px-3 rounded-xl border border-amber-200">
-            <Lock className="w-3.5 h-3.5 text-brand-crimson" />
-            <span>Authorized Accounts Only • No Public Signups</span>
-          </div>
-
+      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="bg-white py-8 px-6 shadow-sm rounded-2xl border border-gray-200 sm:px-8 space-y-5">
           {/* Error alert */}
           {error && (
-            <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 flex items-start gap-2">
+            <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-xs text-red-700 flex items-start gap-2">
               <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
@@ -104,30 +71,31 @@ export default function LoginPage() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">
-                Email Address
+              <label className="block text-xs font-semibold text-gray-700 mb-1">
+                Username
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                  <Mail className="h-4 w-4 text-gray-400" />
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <UserIcon className="h-4 w-4 text-gray-400" />
                 </div>
                 <input
-                  type="email"
+                  type="text"
                   required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="supermarket@example.com"
-                  className="w-full pl-10 pr-3 py-2.5 bg-gray-50 border border-gray-300 focus:border-brand-crimson focus:ring-2 focus:ring-red-100 rounded-xl text-sm outline-none transition-all"
+                  autoFocus
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter your username"
+                  className="w-full pl-9 pr-3 py-2 bg-white border border-gray-300 focus:border-red-700 focus:ring-1 focus:ring-red-700 rounded-lg text-sm outline-none transition-colors"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">
+              <label className="block text-xs font-semibold text-gray-700 mb-1">
                 Password
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Lock className="h-4 w-4 text-gray-400" />
                 </div>
                 <input
@@ -135,13 +103,13 @@ export default function LoginPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••••••"
-                  className="w-full pl-10 pr-10 py-2.5 bg-gray-50 border border-gray-300 focus:border-brand-crimson focus:ring-2 focus:ring-red-100 rounded-xl text-sm outline-none transition-all"
+                  placeholder="Enter your password"
+                  className="w-full pl-9 pr-10 py-2 bg-white border border-gray-300 focus:border-red-700 focus:ring-1 focus:ring-red-700 rounded-lg text-sm outline-none transition-colors"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-400 hover:text-gray-600"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -151,56 +119,23 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-crimson to-red-700 hover:from-red-800 hover:to-brand-crimson text-white py-3 rounded-xl font-bold text-sm shadow-md shadow-red-900/20 hover:shadow-lg transition-all disabled:opacity-50"
+              className="w-full mt-2 inline-flex items-center justify-center gap-2 bg-red-700 hover:bg-red-800 text-white py-2.5 rounded-lg font-semibold text-sm transition-colors disabled:opacity-50"
             >
               {loading ? (
-                <span>Verifying credentials...</span>
+                <span>Signing in...</span>
               ) : (
                 <>
-                  <span>Sign In to Portal</span>
+                  <span>Sign In</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
             </button>
           </form>
 
-          {/* Demo Credentials Quick Fillers */}
-          <div className="pt-4 border-t border-gray-100 space-y-2">
-            <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider block text-center">
-              Quick-Fill Test Credentials:
-            </span>
-            <div className="grid grid-cols-3 gap-2">
-              <button
-                type="button"
-                onClick={() => fillCredentials('admin')}
-                className="py-1.5 px-2 bg-amber-50 hover:bg-amber-100 text-amber-900 rounded-lg text-[11px] font-bold border border-amber-200 transition-colors"
-              >
-                🔐 Admin
-              </button>
-              <button
-                type="button"
-                onClick={() => fillCredentials('supermarket1')}
-                className="py-1.5 px-2 bg-red-50 hover:bg-red-100 text-red-900 rounded-lg text-[11px] font-bold border border-red-200 transition-colors"
-              >
-                🏪 Store #1
-              </button>
-              <button
-                type="button"
-                onClick={() => fillCredentials('supermarket2')}
-                className="py-1.5 px-2 bg-blue-50 hover:bg-blue-100 text-blue-900 rounded-lg text-[11px] font-bold border border-blue-200 transition-colors"
-              >
-                🏪 Store #2
-              </button>
-            </div>
-          </div>
-
-          {/* Registration Notice */}
-          <div className="bg-emerald-50 rounded-2xl p-4 border border-emerald-200 space-y-2 text-center">
-            <span className="text-xs font-bold text-emerald-950 block">
-              Don't have a supermarket account yet?
-            </span>
-            <p className="text-[11px] text-emerald-800 leading-relaxed">
-              Supermarket accounts are manually provisioned by the Tasty Namkeens Admin team after verification.
+          {/* Need Account Box */}
+          <div className="pt-4 border-t border-gray-100 text-center space-y-2">
+            <p className="text-xs text-gray-500">
+              Don't have a supermarket wholesale account yet?
             </p>
             <a
               href={`https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(
@@ -208,16 +143,16 @@ export default function LoginPage() {
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-sm"
+              className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-semibold px-4 py-2 rounded-lg transition-colors w-full"
             >
-              <MessageCircle className="w-3.5 h-3.5 fill-current" />
+              <MessageCircle className="w-4 h-4 fill-current" />
               <span>Request Account via WhatsApp</span>
             </a>
           </div>
 
-          <div className="text-center">
-            <Link to="/" className="text-xs font-semibold text-gray-500 hover:text-brand-crimson">
-              &larr; Back to Public Snack Catalog
+          <div className="text-center pt-2">
+            <Link to="/" className="text-xs font-medium text-gray-500 hover:text-red-700">
+              &larr; Back to Products
             </Link>
           </div>
         </div>

@@ -21,16 +21,19 @@ const userSchema = new mongoose.Schema(
       maxlength: [100, 'Name cannot exceed 100 characters'],
     },
 
-    email: {
+    username: {
       type: String,
-      required: [true, 'Email is required'],
+      required: [true, 'Username is required'],
       unique: true,
       lowercase: true,
       trim: true,
-      match: [
-        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
-        'Please enter a valid email address',
-      ],
+      minlength: [3, 'Username must be at least 3 characters'],
+    },
+
+    email: {
+      type: String,
+      lowercase: true,
+      trim: true,
     },
 
     password: {

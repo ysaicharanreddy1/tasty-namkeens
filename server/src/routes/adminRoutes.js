@@ -73,11 +73,12 @@ router.get('/users', async (req, res, next) => {
 // ── POST /api/admin/users – Create supermarket account ───────────────────
 router.post('/users', async (req, res, next) => {
   try {
-    const { name, email, password, phone, whatsappNumber, address, storeRef } = req.body;
+    const { name, username, email, password, phone, whatsappNumber, address, storeRef } = req.body;
 
     const user = await User.create({
       name,
-      email,
+      username: (username || email || name.replace(/\s+/g, '').toLowerCase()),
+      email: email || '',
       password,
       phone,
       whatsappNumber,

@@ -28,6 +28,7 @@ const Order   = require('./models/Order');
 
 const adminData = {
   name: 'Tasty Namkeens Admin',
+  username: 'admin',
   email: 'admin@tastynam-keens.com',
   password: 'Admin@TastyNamkeens2024', // Will be hashed by pre-save hook
   role: 'admin',
@@ -328,69 +329,16 @@ const seedDB = async () => {
     const products = await Product.create(productsData);
     products.forEach((p) => console.log(`   ✅ ${p.name} (${p.netWeight})`));
 
-    // ── Step 3: Create Stores ─────────────────────────────────────────────
-    console.log('\n🏪 Creating store profiles...');
-
-    // Store 1 → stocks all 15 products
-    const store1 = await Store.create({
-      ...storesData[0],
-      activeSnacks: products.map((p) => p._id),
-    });
-
-    // Store 2 → stocks first 8 products
-    const store2 = await Store.create({
-      ...storesData[1],
-      activeSnacks: products.slice(0, 8).map((p) => p._id),
-    });
-
-    console.log(`   ✅ ${store1.storeName} (stocks ${store1.activeSnacks.length} products)`);
-    console.log(`   ✅ ${store2.storeName} (stocks ${store2.activeSnacks.length} products)`);
-
-    // ── Step 4: Update Products with Store Back-References ────────────────
-    console.log('\n🔗 Mapping store references to products...');
-
-    // All products get store1
-    await Product.updateMany(
-      { _id: { $in: products.map((p) => p._id) } },
-      { $addToSet: { availableStores: store1._id } }
-    );
-
-    // First 8 products also get store2
-    await Product.updateMany(
-      { _id: { $in: products.slice(0, 8).map((p) => p._id) } },
-      { $addToSet: { availableStores: store2._id } }
-    );
-
-    console.log('   ✅ Product ↔ Store cross-references set.');
-
-    // ── Step 5: Create Supermarket User Accounts ───────────────────────────
-    console.log('\n👥 Creating supermarket user accounts...');
-
-    const sm1 = await User.create({ ...supermarketsData[0], storeRef: store1._id });
-    const sm2 = await User.create({ ...supermarketsData[1], storeRef: store2._id });
-
-    // Link users back to stores
-    store1.userRef = sm1._id;
-    store2.userRef = sm2._id;
-    await store1.save();
-    await store2.save();
-
-    console.log(`   ✅ ${sm1.name} → email: ${sm1.email} | password: Supermarket@123`);
-    console.log(`   ✅ ${sm2.name} → email: ${sm2.email} | password: Supermarket@456`);
-
     // ── Summary ────────────────────────────────────────────────────────────
     console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     console.log('  🎉 DATABASE SEEDED SUCCESSFULLY!');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     console.log(`\n  📊 Created:`);
-    console.log(`     • 1 Admin account`);
+    console.log(`     • 1 Admin account (Username: admin)`);
     console.log(`     • ${products.length} Real Products`);
-    console.log(`     • 2 Stores`);
-    console.log(`     • 2 Supermarket accounts`);
+    console.log(`     • 0 Stores (ready to add via Admin Dashboard)`);
     console.log('\n  🔑 Login Credentials:');
-    console.log(`     Admin       → admin@tastynam-keens.com  | Admin@TastyNamkeens2024`);
-    console.log(`     Supermarket → srilakshmi@example.com   | Supermarket@123`);
-    console.log(`     Supermarket → balaji@example.com        | Supermarket@456`);
+    console.log(`     Admin       → Username: admin  | Password: Admin@TastyNamkeens2024`);
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
     process.exit(0);

@@ -26,6 +26,7 @@ const sendTokenResponse = (user, statusCode, res) => {
     user: {
       id: user._id,
       name: user.name,
+      username: user.username,
       email: user.email,
       role: user.role,
       phone: user.phone,
@@ -38,23 +39,29 @@ const sendTokenResponse = (user, statusCode, res) => {
 // ── POST /api/auth/login ───────────────────────────────────────────────────
 exports.login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { username, email, password } = req.body;
+    const loginIdentifier = (username || email || '').trim().toLowerCase();
 
     // 1. Validate input
-    if (!email || !password) {
+    if (!loginIdentifier || !password) {
       return res.status(400).json({
         success: false,
-        message: 'Please provide both email and password.',
+        message: 'Please provide both username and password.',
       });
     }
 
-    // 2. Find user (explicitly select password – it's hidden by default)
-    const user = await User.findOne({ email }).select('+password');
+    // 2. Find user by username or email
+    const user = await User.findOne({
+      $or: [
+        { username: loginIdentifier },
+        { email: loginIdentifier }
+      ]
+    }).select('+password');
 
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: 'Invalid email or password.',
+        message: 'Invalid username or password.',
       });
     }
 

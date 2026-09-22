@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import ProductDetailPage from './pages/ProductDetailPage';
 import SupermarketDashboard from './pages/SupermarketDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 
@@ -29,6 +30,9 @@ export default function App() {
     <Routes>
       {/* Public Home Page: Catalog + Store Finder */}
       <Route path="/" element={<HomePage />} />
+
+      {/* Public Product Detail Page with Image Zoom */}
+      <Route path="/products/:id" element={<ProductDetailPage />} />
 
       {/* Auth Login Page */}
       <Route path="/login" element={<LoginPage />} />
