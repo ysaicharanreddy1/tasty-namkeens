@@ -6,6 +6,7 @@ import SearchBar from '../components/SearchBar';
 import ProductCard from '../components/ProductCard';
 import StoreFinderModal from '../components/StoreFinderModal';
 import WhatsAppChat from '../components/WhatsAppChat';
+import BannerPopup from '../components/BannerPopup';
 import api from '../api/axios';
 import { Loader2 } from 'lucide-react';
 
@@ -45,6 +46,9 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
+      {/* Top-to-Bottom Slide Animation Announcement Banner Popup */}
+      <BannerPopup />
+
       <main className="flex-1">
         <Hero />
 
@@ -75,7 +79,8 @@ export default function HomePage() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
+              /* Exactly 4 products per row on large screens (grid-cols-1 sm:grid-cols-2 lg:grid-cols-4) */
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {filtered.map((product) => (
                   <ProductCard
                     key={product._id}
