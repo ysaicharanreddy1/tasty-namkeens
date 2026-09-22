@@ -6,7 +6,6 @@ import SearchBar from '../components/SearchBar';
 import ProductCard from '../components/ProductCard';
 import StoreFinderModal from '../components/StoreFinderModal';
 import WhatsAppChat from '../components/WhatsAppChat';
-import BannerPopup from '../components/BannerPopup';
 import api from '../api/axios';
 import { Loader2 } from 'lucide-react';
 
@@ -46,13 +45,11 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
-      {/* Top-to-Bottom Slide Animation Announcement Banner Popup */}
-      <BannerPopup />
-
       <main className="flex-1">
+        {/* Hero Section with the animated slide-down photo banner */}
         <Hero />
 
-        {/* Products */}
+        {/* Products Section (Strictly 4 per row) */}
         <section id="products" className="py-12 sm:py-16 max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">Our Products</h2>
 
@@ -79,7 +76,7 @@ export default function HomePage() {
                 </button>
               </div>
             ) : (
-              /* Exactly 4 products per row on large screens (grid-cols-1 sm:grid-cols-2 lg:grid-cols-4) */
+              /* Exactly 4 products in a single row, next 4 in next row */
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {filtered.map((product) => (
                   <ProductCard
@@ -93,7 +90,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* About */}
+        {/* About Section */}
         <section id="about" className="py-12 sm:py-16 bg-gray-50">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">About Tasty Namkeens</h2>
