@@ -1,9 +1,9 @@
 /**
- * seed.js – Database Seed Script
+ * seed.js – Database Seed Script (REAL PRODUCTS)
  *
  * Populates the database with:
  *   ✅ 1 Master Admin account
- *   ✅ 5 realistic Tasty Namkeens snack products
+ *   ✅ 15 REAL Tasty Namkeens products (from actual packaging)
  *   ✅ 2 sample supermarket store profiles
  *   ✅ 2 supermarket user accounts linked to stores
  *   ✅ Proper Store ↔ Product cross-references
@@ -31,75 +31,200 @@ const adminData = {
   email: 'admin@tastynam-keens.com',
   password: 'Admin@TastyNamkeens2024', // Will be hashed by pre-save hook
   role: 'admin',
-  phone: '9000000000',
+  phone: '9908478783',
   address: {
-    street: 'Tasty Namkeens HQ, Industrial Area',
+    street: 'Plot No. 143, Vivekanda Nagar Colony, Borabanda',
     city: 'Hyderabad',
     state: 'Telangana',
-    pincode: '500001',
+    pincode: '500018',
   },
 };
 
 const productsData = [
+  // ── Batch 1 ────────────────────────────────────────────────────────
   {
-    name: 'Aloo Bhujia',
-    category: 'Bhujia',
+    name: 'Palli Chikki (200g)',
+    category: 'Chikki',
     netWeight: '200g',
+    mrp: 70,
     description:
-      'Classic crispy potato bhujia seasoned with a perfect blend of spices. A timeless Indian snack loved by all ages.',
-    ingredients:
-      'Potato starch, besan (chickpea flour), salt, turmeric, red chilli powder, cumin, vegetable oil.',
-    wholesalePrice: 55,
+      'Traditional peanut chikki made with premium palli and jaggery. A crunchy, sweet snack perfect with tea or as an energy bar.',
+    ingredients: 'Palli, jaggery, liquid glucose.',
+    wholesalePrice: 50,
     minOrderQty: 20,
-    imageUrl: '/images/aloo-bhujia.png',
+    imageUrl: '/images/products/palli-chikki-200g.jpg',
   },
   {
-    name: 'Moong Dal Namkeen',
-    category: 'Lentil Snacks',
-    netWeight: '250g',
+    name: 'Palli Laddu',
+    category: 'Laddu',
+    netWeight: '200g',
+    mrp: 70,
     description:
-      'Premium whole moong dal fried to golden perfection. Light, crunchy, and mildly spiced for a guilt-free snacking experience.',
-    ingredients:
-      'Moong dal, vegetable oil, salt, black pepper, asafoetida (hing), lemon powder.',
-    wholesalePrice: 70,
-    minOrderQty: 15,
-    imageUrl: '/images/moong-dal.png',
+      'Hand-rolled peanut laddus made with roasted palli and jaggery. A wholesome traditional sweet snack packed with protein.',
+    ingredients: 'Palli, jaggery, liquid glucose.',
+    wholesalePrice: 50,
+    minOrderQty: 20,
+    imageUrl: '/images/products/palli-laddu-200g.jpg',
   },
   {
-    name: 'Kanda Poha Chivda',
-    category: 'Chivda',
-    netWeight: '300g',
+    name: 'Butter Chakli',
+    category: 'Chakli',
+    netWeight: '100g',
+    mrp: 40,
     description:
-      'A Maharashtrian specialty! Thin flattened rice mixed with crunchy onion, peanuts, and a blend of sweet & spicy masalas.',
-    ingredients:
-      'Thin poha (flattened rice), fried onion, groundnuts, curry leaves, green chilli, sugar, salt, oil.',
-    wholesalePrice: 85,
-    minOrderQty: 12,
-    imageUrl: '/images/kanda-poha-chivda.png',
+      'Crispy spiral-shaped rice flour chakli with a delicate butter flavor. A popular South Indian tea-time snack.',
+    ingredients: 'Rice flour, salt, spices, veg oil, citric acid.',
+    wholesalePrice: 28,
+    minOrderQty: 30,
+    imageUrl: '/images/products/butter-chakli.jpg',
   },
   {
-    name: 'Peri Peri Mathri',
-    category: 'Mathri',
+    name: 'Batana',
+    category: 'Roasted Snacks',
+    netWeight: '100g',
+    mrp: 35,
+    description:
+      'Crunchy roasted batana (chickpeas) seasoned with turmeric and salt. A simple, protein-rich healthy snack.',
+    ingredients: 'Batana, turmeric powder, salt.',
+    wholesalePrice: 24,
+    minOrderQty: 30,
+    imageUrl: '/images/products/batana.jpg',
+  },
+  {
+    name: 'Mix Nuts',
+    category: 'Mixed Snacks',
     netWeight: '150g',
+    mrp: 60,
     description:
-      'Flaky, crispy wheat-flour crackers dusted with fiery peri peri seasoning. A bold twist on the traditional mathri.',
-    ingredients:
-      'Wheat flour (maida), vanaspati, peri peri seasoning, salt, carom seeds (ajwain), baking soda.',
-    wholesalePrice: 48,
-    minOrderQty: 25,
-    imageUrl: '/images/peri-peri-mathri.png',
+      'A crunchy assortment of roasted peanuts, cow peas, green peas, and kabuli chana. The ultimate party mix.',
+    ingredients: 'Peanut, cow peas, green peas, kabuli chana.',
+    wholesalePrice: 42,
+    minOrderQty: 20,
+    imageUrl: '/images/products/mix-nuts.jpg',
+  },
+
+  // ── Batch 2 ────────────────────────────────────────────────────────
+  {
+    name: 'Bingo',
+    category: 'Chips',
+    netWeight: '150g',
+    mrp: 70,
+    description:
+      'Crispy potato-based finger chips seasoned with chilli powder. A spicy, crunchy snack everyone loves.',
+    ingredients: 'Potato, iodised salt, chilli powder.',
+    wholesalePrice: 50,
+    minOrderQty: 20,
+    imageUrl: '/images/products/bingo.jpg',
   },
   {
-    name: 'Roasted Masala Peanuts',
-    category: 'Peanuts',
-    netWeight: '500g',
+    name: 'Till Laddu (200g)',
+    category: 'Laddu',
+    netWeight: '200g',
+    mrp: 90,
     description:
-      'Jumbo-sized groundnuts dry-roasted and coated in a tangy chaat masala blend. High protein, zero guilt.',
-    ingredients:
-      'Groundnuts, salt, chaat masala, amchur (dry mango powder), red chilli powder, cumin powder.',
-    wholesalePrice: 120,
-    minOrderQty: 10,
-    imageUrl: '/images/masala-peanuts.png',
+      'Nutritious sesame seed laddus bound with jaggery. Rich in calcium and iron — a traditional winter delicacy.',
+    ingredients: 'Till (sesame seeds), jaggery, liquid glucose.',
+    wholesalePrice: 65,
+    minOrderQty: 15,
+    imageUrl: '/images/products/till-laddu.jpg',
+  },
+  {
+    name: 'Murmura Laddu',
+    category: 'Laddu',
+    netWeight: '100g',
+    mrp: 30,
+    description:
+      'Light and airy puffed rice laddus with jaggery and roasted grams. A classic sweet snack loved by kids.',
+    ingredients: 'Murmura (puffed rice), jaggery, veg oil, roasted grams.',
+    wholesalePrice: 20,
+    minOrderQty: 30,
+    imageUrl: '/images/products/murmura-laddu.jpg',
+  },
+  {
+    name: 'Palli Chikki (100g)',
+    category: 'Chikki',
+    netWeight: '100g',
+    mrp: 35,
+    description:
+      'Compact peanut chikki bar — same authentic taste in a smaller pack. Great for on-the-go snacking.',
+    ingredients: 'Palli, jaggery, liquid glucose.',
+    wholesalePrice: 24,
+    minOrderQty: 30,
+    imageUrl: '/images/products/palli-chikki-100g.jpg',
+  },
+  {
+    name: 'Pasta',
+    category: 'Chips',
+    netWeight: '150g',
+    mrp: 70,
+    description:
+      'Crunchy pasta-shaped potato snack seasoned with salt and chilli. A fun, spicy munch for all occasions.',
+    ingredients: 'Potato, iodised salt, chilli powder.',
+    wholesalePrice: 50,
+    minOrderQty: 20,
+    imageUrl: '/images/products/pasta.jpg',
+  },
+
+  // ── Batch 3 ────────────────────────────────────────────────────────
+  {
+    name: 'Andhra Murkul',
+    category: 'Murukku',
+    netWeight: '200g',
+    mrp: 60,
+    description:
+      'Authentic Andhra-style murukku made with black gram and rice. Crispy, spicy, and deeply satisfying.',
+    ingredients: 'Black gram, rice, chilli, spices, edible oil.',
+    wholesalePrice: 42,
+    minOrderQty: 20,
+    imageUrl: '/images/products/andhra-murkul.jpg',
+  },
+  {
+    name: 'Till Laddu (100g)',
+    category: 'Laddu',
+    netWeight: '100g',
+    mrp: 45,
+    description:
+      'Bite-sized sesame seed laddus in a convenient smaller pack. Perfect for gifting and daily snacking.',
+    ingredients: 'Till (sesame seeds), jaggery, liquid glucose.',
+    wholesalePrice: 32,
+    minOrderQty: 25,
+    imageUrl: '/images/products/till-laddu-100g.jpg',
+  },
+  {
+    name: 'Chana Roasted',
+    category: 'Roasted Snacks',
+    netWeight: '200g',
+    mrp: 60,
+    description:
+      'Roasted black chana with a light turmeric coating. A high-protein, high-fiber healthy snack option.',
+    ingredients: 'Black chana, turmeric powder, salt.',
+    wholesalePrice: 42,
+    minOrderQty: 20,
+    imageUrl: '/images/products/chana-roasted.jpg',
+  },
+  {
+    name: 'Green Pease',
+    category: 'Roasted Snacks',
+    netWeight: '175g',
+    mrp: 70,
+    description:
+      'Crispy fried green peas with a spicy masala coating. Crunchy, tangy, and utterly addictive.',
+    ingredients: 'Green peas, spices, citric acid, edible oil.',
+    wholesalePrice: 50,
+    minOrderQty: 20,
+    imageUrl: '/images/products/green-pease.jpg',
+  },
+  {
+    name: 'Besan Palli',
+    category: 'Peanut Snacks',
+    netWeight: '200g',
+    mrp: 80,
+    description:
+      'Peanuts coated in a crispy, spicy besan (gram flour) shell. The perfect crunchy namkeen for any gathering.',
+    ingredients: 'Besan (gram flour), peanut, chilli, salt, veg oil.',
+    wholesalePrice: 56,
+    minOrderQty: 15,
+    imageUrl: '/images/products/besan-palli.jpg',
   },
 ];
 
@@ -206,16 +331,16 @@ const seedDB = async () => {
     // ── Step 3: Create Stores ─────────────────────────────────────────────
     console.log('\n🏪 Creating store profiles...');
 
-    // Store 1 → stocks all 5 products
+    // Store 1 → stocks all 15 products
     const store1 = await Store.create({
       ...storesData[0],
       activeSnacks: products.map((p) => p._id),
     });
 
-    // Store 2 → stocks first 3 products only
+    // Store 2 → stocks first 8 products
     const store2 = await Store.create({
       ...storesData[1],
-      activeSnacks: products.slice(0, 3).map((p) => p._id),
+      activeSnacks: products.slice(0, 8).map((p) => p._id),
     });
 
     console.log(`   ✅ ${store1.storeName} (stocks ${store1.activeSnacks.length} products)`);
@@ -230,9 +355,9 @@ const seedDB = async () => {
       { $addToSet: { availableStores: store1._id } }
     );
 
-    // First 3 products also get store2
+    // First 8 products also get store2
     await Product.updateMany(
-      { _id: { $in: products.slice(0, 3).map((p) => p._id) } },
+      { _id: { $in: products.slice(0, 8).map((p) => p._id) } },
       { $addToSet: { availableStores: store2._id } }
     );
 
@@ -259,7 +384,7 @@ const seedDB = async () => {
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     console.log(`\n  📊 Created:`);
     console.log(`     • 1 Admin account`);
-    console.log(`     • ${products.length} Products`);
+    console.log(`     • ${products.length} Real Products`);
     console.log(`     • 2 Stores`);
     console.log(`     • 2 Supermarket accounts`);
     console.log('\n  🔑 Login Credentials:');

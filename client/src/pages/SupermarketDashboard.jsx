@@ -204,7 +204,7 @@ export default function SupermarketDashboard() {
                 </p>
               </div>
               <a
-                href="https://wa.me/919999999999?text=Hi%20Admin,%20need%20assistance%20with%20wholesale%20order"
+                href="https://wa.me/919908478783?text=Hi%20Admin,%20need%20assistance%20with%20wholesale%20order"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-white text-amber-900 font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm hover:bg-amber-50 transition-colors"

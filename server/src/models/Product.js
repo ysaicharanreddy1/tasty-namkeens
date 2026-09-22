@@ -33,6 +33,13 @@ const productSchema = new mongoose.Schema(
           'Mathri',
           'Mixture',
           'Biscuits & Cookies',
+          'Chikki',
+          'Laddu',
+          'Chakli',
+          'Murukku',
+          'Roasted Snacks',
+          'Mixed Snacks',
+          'Peanut Snacks',
           'Other',
         ],
         message: 'Invalid category',
@@ -54,6 +61,12 @@ const productSchema = new mongoose.Schema(
     ingredients: {
       type: String,
       trim: true,
+    },
+
+    // MRP (Maximum Retail Price) – public-facing retail price
+    mrp: {
+      type: Number,
+      min: [0, 'MRP cannot be negative'],
     },
 
     // B2B-only field – hidden from public API responses
