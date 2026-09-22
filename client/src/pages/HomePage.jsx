@@ -45,13 +45,20 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
-      <main className="flex-1">
-        {/* Hero Section with the animated slide-down photo banner */}
+      <main className="flex-1 w-full">
+        {/* Full-width Hero Banner with smooth slide-down animation */}
         <Hero />
 
-        {/* Products Section (Strictly 4 per row) */}
-        <section id="products" className="py-12 sm:py-16 max-w-6xl mx-auto px-4 sm:px-6">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">Our Products</h2>
+        {/* Full-width edge-to-edge Products Section */}
+        <section id="products" className="py-14 sm:py-20 w-full px-4 sm:px-8 lg:px-12">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+              Our Best Sellers
+            </h2>
+            <p className="mt-2 text-base text-gray-500">
+              Browse our handcrafted wholesale snack catalog
+            </p>
+          </div>
 
           <SearchBar
             searchQuery={searchQuery}
@@ -62,22 +69,22 @@ export default function HomePage() {
 
           <div className="mt-8">
             {loading ? (
-              <div className="py-16 flex justify-center">
-                <Loader2 className="w-8 h-8 text-red-700 animate-spin" />
+              <div className="py-20 flex justify-center">
+                <Loader2 className="w-10 h-10 text-red-700 animate-spin" />
               </div>
             ) : filtered.length === 0 ? (
-              <div className="py-16 text-center text-gray-400 text-sm">
-                No products found.{' '}
+              <div className="py-20 text-center text-gray-400 text-base">
+                No products matched your search.{' '}
                 <button
                   onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}
-                  className="text-red-700 font-medium hover:underline"
+                  className="text-red-700 font-bold hover:underline ml-1"
                 >
                   Reset filters
                 </button>
               </div>
             ) : (
-              /* Exactly 4 products in a single row, next 4 in next row */
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              /* Edge-to-edge 4 products per row, big and spacious with large gaps */
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                 {filtered.map((product) => (
                   <ProductCard
                     key={product._id}
@@ -90,28 +97,30 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* About Section */}
-        <section id="about" className="py-12 sm:py-16 bg-gray-50">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">About Tasty Namkeens</h2>
-            <p className="text-gray-600 text-sm leading-relaxed">
+        {/* Full-width About Section */}
+        <section id="about" className="py-16 sm:py-24 bg-gray-50 border-t border-gray-200 w-full px-4 sm:px-8 lg:px-12">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
+              About Tasty Namkeens
+            </h2>
+            <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
               Repacked by S.V. Enterprises from Plot No. 143, Vivekanda Nagar Colony, Borabanda, Hyderabad.
               We deliver authentic Indian snacks — from traditional palli chikki and till laddu to crispy chakli
               and spicy bingo chips. All products are FSSAI certified (Lic: 23624030002668) and made with
-              quality ingredients.
+              premium quality ingredients.
             </p>
-            <div className="mt-6 flex items-center justify-center gap-8 text-center">
+            <div className="pt-4 flex items-center justify-center gap-10 sm:gap-16">
               <div>
-                <div className="text-2xl font-bold text-red-700">15+</div>
-                <div className="text-xs text-gray-500">Products</div>
+                <div className="text-3xl sm:text-4xl font-black text-red-700">15+</div>
+                <div className="text-xs sm:text-sm font-semibold text-gray-500 uppercase mt-1">Snack Varieties</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-red-700">FSSAI</div>
-                <div className="text-xs text-gray-500">Certified</div>
+                <div className="text-3xl sm:text-4xl font-black text-red-700">FSSAI</div>
+                <div className="text-xs sm:text-sm font-semibold text-gray-500 uppercase mt-1">Certified Food Safety</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-red-700">100%</div>
-                <div className="text-xs text-gray-500">Vegetarian</div>
+                <div className="text-3xl sm:text-4xl font-black text-red-700">100%</div>
+                <div className="text-xs sm:text-sm font-semibold text-gray-500 uppercase mt-1">Vegetarian</div>
               </div>
             </div>
           </div>

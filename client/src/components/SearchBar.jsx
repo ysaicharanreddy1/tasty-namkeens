@@ -20,37 +20,37 @@ export default function SearchBar({
   setSelectedCategory,
 }) {
   return (
-    <div className="space-y-4">
-      {/* Search Input */}
-      <div className="relative max-w-md mx-auto">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+    <div className="space-y-6 max-w-4xl mx-auto mb-10">
+      {/* Search Input with bigger, clearer text */}
+      <div className="relative max-w-xl mx-auto">
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
         <input
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search products..."
-          className="w-full pl-10 pr-10 py-2.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-red-700 focus:ring-1 focus:ring-red-700 transition-colors"
+          placeholder="Search among all snack varieties..."
+          className="w-full pl-12 pr-12 py-3.5 bg-white border-2 border-gray-200 rounded-2xl text-base focus:outline-none focus:border-red-700 transition-colors shadow-sm"
         />
         {searchQuery && (
           <button
             onClick={() => setSearchQuery('')}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1"
           >
-            <X className="w-4 h-4" />
+            <X className="w-5 h-5" />
           </button>
         )}
       </div>
 
-      {/* Category Filter */}
-      <div className="flex items-center justify-center flex-wrap gap-2">
+      {/* Category Pills Filter */}
+      <div className="flex items-center justify-center flex-wrap gap-2.5">
         {CATEGORIES.map((cat) => (
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+            className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
               selectedCategory === cat
-                ? 'bg-red-700 text-white'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                ? 'bg-red-700 text-white shadow-md'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-transparent'
             }`}
           >
             {cat}

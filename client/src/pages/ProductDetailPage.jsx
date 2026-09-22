@@ -67,7 +67,7 @@ export default function ProductDetailPage() {
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <main className="flex-1 w-full px-4 sm:px-8 lg:px-12 py-10 sm:py-14">
         {/* Breadcrumb / Back button */}
         <div className="mb-6 flex items-center gap-2 text-xs text-gray-500">
           <Link to="/" className="hover:text-red-700 flex items-center gap-1 font-medium">
