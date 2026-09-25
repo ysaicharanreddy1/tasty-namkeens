@@ -28,9 +28,9 @@ const Order   = require('./models/Order');
 
 const adminData = {
   name: 'Tasty Namkeens Admin',
-  username: 'admin',
+  username: '9908478783',
   email: 'admin@tastynam-keens.com',
-  password: 'Admin@TastyNamkeens2024', // Will be hashed by pre-save hook
+  password: 'tastynamkeens@123', // Will be hashed by pre-save hook
   role: 'admin',
   phone: '9908478783',
   address: {
@@ -334,11 +334,11 @@ const seedDB = async () => {
     console.log('  🎉 DATABASE SEEDED SUCCESSFULLY!');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     console.log(`\n  📊 Created:`);
-    console.log(`     • 1 Admin account (Username: admin)`);
+    console.log(`     • 1 Admin account (Username: 9908478783)`);
     console.log(`     • ${products.length} Real Products`);
     console.log(`     • 0 Stores (ready to add via Admin Dashboard)`);
     console.log('\n  🔑 Login Credentials:');
-    console.log(`     Admin       → Username: admin  | Password: Admin@TastyNamkeens2024`);
+    console.log(`     Admin       → Username: 9908478783  | Password: tastynamkeens@123`);
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
     process.exit(0);

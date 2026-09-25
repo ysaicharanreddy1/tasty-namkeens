@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { ChevronDown, Send } from 'lucide-react';
 
 const PHONE = '919908478783';
+const SESSION_KEY = 'wa_chat_minimized';
 
 export default function WhatsAppChat() {
-  // Directly open as a box when website opens
-  const [open, setOpen] = useState(true);
+  // Open by default only if the user hasn't minimized it this session
+  const [open, setOpen] = useState(() => {
+    return sessionStorage.getItem(SESSION_KEY) !== 'true';
+  });
   const [message, setMessage] = useState('');
 
   const sendMessage = () => {
@@ -40,7 +43,7 @@ export default function WhatsAppChat() {
             </div>
             {/* Top Right Down Arrow mark to compress box into symbol */}
             <button
-              onClick={() => setOpen(false)}
+              onClick={() => { setOpen(false); sessionStorage.setItem(SESSION_KEY, 'true'); }}
               className="p-1 rounded-full hover:bg-white/20 text-white transition-colors"
               title="Minimize chat"
             >

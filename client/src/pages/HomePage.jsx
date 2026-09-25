@@ -103,12 +103,6 @@ export default function HomePage() {
             <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
               About Tasty Namkeens
             </h2>
-            <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
-              Repacked by S.V. Enterprises from Plot No. 143, Vivekanda Nagar Colony, Borabanda, Hyderabad.
-              We deliver authentic Indian snacks — from traditional palli chikki and till laddu to crispy chakli
-              and spicy bingo chips. All products are FSSAI certified (Lic: 23624030002668) and made with
-              premium quality ingredients.
-            </p>
             <div className="pt-4 flex items-center justify-center gap-10 sm:gap-16">
               <div>
                 <div className="text-3xl sm:text-4xl font-black text-red-700">15+</div>
